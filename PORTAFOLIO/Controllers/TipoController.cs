@@ -12,7 +12,7 @@ namespace PORTAFOLIO.Controllers
 {
     public class TipoController : Controller
     {
-        private portafolioEntities1 db = new portafolioEntities1();
+        private portafolioEntities2 db = new portafolioEntities2();
 
         // GET: Tipo
         public ActionResult Index()

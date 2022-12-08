@@ -10,116 +10,107 @@ using PORTAFOLIO.Models;
 
 namespace PORTAFOLIO.Controllers
 {
-    public class ExperienciaController : Controller
+    public class AspNetUsersController : Controller
     {
         private portafolioEntities2 db = new portafolioEntities2();
 
-        // GET: Experiencia
+        // GET: AspNetUsers
         public ActionResult Index()
         {
-            var experiencia = db.Experiencia.Include(e => e.AspNetUsers).Include(e => e.Tipo);
-            return View(experiencia.ToList());
+            return View(db.AspNetUsers.ToList());
         }
 
-        // GET: Experiencia/Details/5
+        // GET: AspNetUsers/Details/5
         public ActionResult Details(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Experiencia experiencia = db.Experiencia.Find(id);
-            if (experiencia == null)
+            AspNetUsers aspNetUsers = db.AspNetUsers.Find(id);
+            if (aspNetUsers == null)
             {
                 return HttpNotFound();
             }
-            return View(experiencia);
+            return View(aspNetUsers);
         }
 
-        // GET: Experiencia/Create
+        // GET: AspNetUsers/Create
         public ActionResult Create()
         {
-            ViewBag.UsuarioID = new SelectList(db.AspNetUsers, "Id", "Email");
-            ViewBag.Tipo_ID = new SelectList(db.Tipo, "Id", "Descripcion");
             return View();
         }
 
-        // POST: Experiencia/Create
+        // POST: AspNetUsers/Create
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,UsuarioID,Tipo_ID,Nombre,Titulo,Desde,Hasta,Descripcion")] Experiencia experiencia)
+        public ActionResult Create([Bind(Include = "Id,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName,Direccion,Ciudad,Pais,Telefono,Facebook,Twitter,Youtube,Instagram,Photo,Birthday,Edad,Website,Degree,Aboutinfo,Experiencia_Principal,Text_Experiencia_principal")] AspNetUsers aspNetUsers)
         {
             if (ModelState.IsValid)
             {
-                db.Experiencia.Add(experiencia);
+                db.AspNetUsers.Add(aspNetUsers);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.UsuarioID = new SelectList(db.AspNetUsers, "Id", "Email", experiencia.UsuarioID);
-            ViewBag.Tipo_ID = new SelectList(db.Tipo, "Id", "Descripcion", experiencia.Tipo_ID);
-            return View(experiencia);
+            return View(aspNetUsers);
         }
 
-        // GET: Experiencia/Edit/5
+        // GET: AspNetUsers/Edit/5
         public ActionResult Edit(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Experiencia experiencia = db.Experiencia.Find(id);
-            if (experiencia == null)
+            AspNetUsers aspNetUsers = db.AspNetUsers.Find(id);
+            if (aspNetUsers == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.UsuarioID = new SelectList(db.AspNetUsers, "Id", "Email", experiencia.UsuarioID);
-            ViewBag.Tipo_ID = new SelectList(db.Tipo, "Id", "Descripcion", experiencia.Tipo_ID);
-            return View(experiencia);
+            return View(aspNetUsers);
         }
 
-        // POST: Experiencia/Edit/5
+        // POST: AspNetUsers/Edit/5
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,UsuarioID,Tipo_ID,Nombre,Titulo,Desde,Hasta,Descripcion")] Experiencia experiencia)
+        public ActionResult Edit([Bind(Include = "Id,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName,Direccion,Ciudad,Pais,Telefono,Facebook,Twitter,Youtube,Instagram,Photo,Birthday,Edad,Website,Degree,Aboutinfo,Experiencia_Principal,Text_Experiencia_principal")] AspNetUsers aspNetUsers)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(experiencia).State = EntityState.Modified;
+                db.Entry(aspNetUsers).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.UsuarioID = new SelectList(db.AspNetUsers, "Id", "Email", experiencia.UsuarioID);
-            ViewBag.Tipo_ID = new SelectList(db.Tipo, "Id", "Descripcion", experiencia.Tipo_ID);
-            return View(experiencia);
+            return View(aspNetUsers);
         }
 
-        // GET: Experiencia/Delete/5
+        // GET: AspNetUsers/Delete/5
         public ActionResult Delete(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Experiencia experiencia = db.Experiencia.Find(id);
-            if (experiencia == null)
+            AspNetUsers aspNetUsers = db.AspNetUsers.Find(id);
+            if (aspNetUsers == null)
             {
                 return HttpNotFound();
             }
-            return View(experiencia);
+            return View(aspNetUsers);
         }
 
-        // POST: Experiencia/Delete/5
+        // POST: AspNetUsers/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            Experiencia experiencia = db.Experiencia.Find(id);
-            db.Experiencia.Remove(experiencia);
+            AspNetUsers aspNetUsers = db.AspNetUsers.Find(id);
+            db.AspNetUsers.Remove(aspNetUsers);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

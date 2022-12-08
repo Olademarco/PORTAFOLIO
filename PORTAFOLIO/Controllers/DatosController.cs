@@ -10,116 +10,112 @@ using PORTAFOLIO.Models;
 
 namespace PORTAFOLIO.Controllers
 {
-    public class ExperienciaController : Controller
+    public class DatosController : Controller
     {
         private portafolioEntities2 db = new portafolioEntities2();
 
-        // GET: Experiencia
+        // GET: Datos
         public ActionResult Index()
         {
-            var experiencia = db.Experiencia.Include(e => e.AspNetUsers).Include(e => e.Tipo);
-            return View(experiencia.ToList());
+            var datos = db.Datos.Include(d => d.AspNetUsers);
+            return View(datos.ToList());
         }
 
-        // GET: Experiencia/Details/5
+        // GET: Datos/Details/5
         public ActionResult Details(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Experiencia experiencia = db.Experiencia.Find(id);
-            if (experiencia == null)
+            Datos datos = db.Datos.Find(id);
+            if (datos == null)
             {
                 return HttpNotFound();
             }
-            return View(experiencia);
+            return View(datos);
         }
 
-        // GET: Experiencia/Create
+        // GET: Datos/Create
         public ActionResult Create()
         {
-            ViewBag.UsuarioID = new SelectList(db.AspNetUsers, "Id", "Email");
-            ViewBag.Tipo_ID = new SelectList(db.Tipo, "Id", "Descripcion");
+            ViewBag.UsuarioId = new SelectList(db.AspNetUsers, "Id", "Email");
             return View();
         }
 
-        // POST: Experiencia/Create
+        // POST: Datos/Create
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,UsuarioID,Tipo_ID,Nombre,Titulo,Desde,Hasta,Descripcion")] Experiencia experiencia)
+        public ActionResult Create([Bind(Include = "Id,Clientes,Texto,UsuarioId,Descripcion_Hecho")] Datos datos)
         {
             if (ModelState.IsValid)
             {
-                db.Experiencia.Add(experiencia);
+                db.Datos.Add(datos);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.UsuarioID = new SelectList(db.AspNetUsers, "Id", "Email", experiencia.UsuarioID);
-            ViewBag.Tipo_ID = new SelectList(db.Tipo, "Id", "Descripcion", experiencia.Tipo_ID);
-            return View(experiencia);
+            ViewBag.UsuarioId = new SelectList(db.AspNetUsers, "Id", "Email", datos.UsuarioId);
+            return View(datos);
         }
 
-        // GET: Experiencia/Edit/5
+        // GET: Datos/Edit/5
         public ActionResult Edit(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Experiencia experiencia = db.Experiencia.Find(id);
-            if (experiencia == null)
+            Datos datos = db.Datos.Find(id);
+            if (datos == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.UsuarioID = new SelectList(db.AspNetUsers, "Id", "Email", experiencia.UsuarioID);
-            ViewBag.Tipo_ID = new SelectList(db.Tipo, "Id", "Descripcion", experiencia.Tipo_ID);
-            return View(experiencia);
+            ViewBag.UsuarioId = new SelectList(db.AspNetUsers, "Id", "Email", datos.UsuarioId);
+            return View(datos);
         }
 
-        // POST: Experiencia/Edit/5
+        // POST: Datos/Edit/5
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,UsuarioID,Tipo_ID,Nombre,Titulo,Desde,Hasta,Descripcion")] Experiencia experiencia)
+        public ActionResult Edit([Bind(Include = "Id,Clientes,Texto,UsuarioId,Descripcion_Hecho")] Datos datos)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(experiencia).State = EntityState.Modified;
+                db.Entry(datos).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.UsuarioID = new SelectList(db.AspNetUsers, "Id", "Email", experiencia.UsuarioID);
-            ViewBag.Tipo_ID = new SelectList(db.Tipo, "Id", "Descripcion", experiencia.Tipo_ID);
-            return View(experiencia);
+            ViewBag.UsuarioId = new SelectList(db.AspNetUsers, "Id", "Email", datos.UsuarioId);
+            return View(datos);
         }
 
-        // GET: Experiencia/Delete/5
+        // GET: Datos/Delete/5
         public ActionResult Delete(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Experiencia experiencia = db.Experiencia.Find(id);
-            if (experiencia == null)
+            Datos datos = db.Datos.Find(id);
+            if (datos == null)
             {
                 return HttpNotFound();
             }
-            return View(experiencia);
+            return View(datos);
         }
 
-        // POST: Experiencia/Delete/5
+        // POST: Datos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            Experiencia experiencia = db.Experiencia.Find(id);
-            db.Experiencia.Remove(experiencia);
+            Datos datos = db.Datos.Find(id);
+            db.Datos.Remove(datos);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

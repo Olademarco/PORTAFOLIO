@@ -13,10 +13,10 @@ namespace PORTAFOLIO.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class portafolioEntities1 : DbContext
+    public partial class portafolioEntities2 : DbContext
     {
-        public portafolioEntities1()
-            : base("name=portafolioEntities1")
+        public portafolioEntities2()
+            : base("name=portafolioEntities2")
         {
         }
     

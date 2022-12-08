@@ -561,7 +561,7 @@
           <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="*" />
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="*" />
         </Association>
-        <EntityContainer Name="portafolioEntities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="portafolioEntities2" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" />
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" />
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" />
@@ -614,7 +614,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="portafolioModelStoreContainer" CdmEntityContainer="portafolioEntities1">
+        <EntityContainerMapping StorageEntityContainer="portafolioModelStoreContainer" CdmEntityContainer="portafolioEntities2">
           <EntitySetMapping Name="AspNetRoles">
             <EntityTypeMapping TypeName="portafolioModel.AspNetRoles">
               <MappingFragment StoreEntitySet="AspNetRoles">
